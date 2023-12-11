@@ -4,7 +4,12 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import TemplateView
+from rest_framework import status
+from rest_framework.generics import CreateAPIView
+from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken
 
+from .api.serializers import LoginSerializer
 from .forms import LoginForm
 
 
