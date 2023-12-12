@@ -1,19 +1,16 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 
 from .forms import CreateCountryForm, EditCountryForm
 from .models import Country
 
 
-class CountryView(View):
-    def get(self, request):
-        countries = Country.objects.all().order_by("-id")
-
-        context = {"countries": countries}
-
-        return render(self.request, "countries/index.html", context)
+class CountryListView(ListView):
+    model = Country
+    queryset = Country.objects.all().order_by("-id")
+    paginate_by = 10
+    template_name = "countries/index.html"
 
 
 class CreateCountryView(CreateView):
