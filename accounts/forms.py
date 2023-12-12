@@ -1,10 +1,31 @@
 from django import forms
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):
     email = forms.EmailField(label="Email")
     password = forms.CharField(label="Password")
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+
+        if not User.objects.filter(username=email).exists():
+            raise forms.ValidationError(f"There is no user with this email.")
+
+        return email
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        user = authenticate(
+            username=cleaned_data.get("email"),
+            password=cleaned_data.get("password"),
+        )
+        if not user and cleaned_data.get("password"):
+            self.add_error("password", "Invalid password.")
+
+        return cleaned_data
 
 
 class RegisterForm(forms.Form):

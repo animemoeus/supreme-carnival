@@ -1,71 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>User Login | BRCG</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-  </head>
+{% extends "accounts/base.html" %} {% block title %} User Login | BRCG 🚀
+{%endblock %} {% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="row container-md justify-content-center">
+    <div class="col-12 col-sm-5">
+      <div class="card shadow">
+        <div class="card-header text-center fw-bold">Login</div>
 
-  <body>
-    <div class="d-flex align-items-center justify-content-center vh-100">
-      <div class="row container-md justify-content-center">
-        <div class="col-12 col-sm-5">
-          <div class="card shadow">
-            <div class="card-header text-center fw-bold">Login</div>
-            <div class="card-body">
-              <form action="{% url 'accounts:login' %}" method="post">
-                {% csrf_token %} {% for field in form %}
-                <div class="mb-3">
-                  <label for="{{ field.label }}" class="form-label"
-                    >{{ field.label }}</label
-                  >
-                  <input
-                    id="{{ field.label }}"
-                    type="{{ field.name }}"
-                    name="{{ field.name }}"
-                    class="form-control"
-                    required="{{ field.field.required }}"
-                  />
-                  {% for error in field.errors %}
-                  <div class="form-text text-danger">{{ error }}</div>
-                  {% endfor %}
-                </div>
-                {% endfor %}
-                <div
-                  class="div d-flex justify-content-between align-items-center"
-                >
-                  <button type="submit" class="btn btn-primary">Login</button>
-                  <p>
-                    <a
-                      href="{% url 'accounts:register' %}"
-                      class="small text-muted"
-                      >Click here to register</a
-                    >
-                  </p>
-                </div>
-              </form>
+        <div class="card-body">
+          <form action="{% url 'accounts:login' %}" method="post">
+            {% csrf_token %} {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.label }}" class="form-label"
+                >{{ field.label }}</label
+              >
+
+              <input
+                id="{{ field.label }}"
+                type="{{ field.name }}"
+                name="{{ field.name }}"
+                class="form-control"
+                requireddd="{{ field.field.required }}"
+              />
+              {% for error in field.errors %}
+              <div class="form-text animate__animated animate__headShake">
+                {{ error }}
+              </div>
+              {% endfor %}
             </div>
-          </div>
+            {% endfor %}
+            <div class="div d-flex justify-content-between align-middle">
+              <button type="submit" class="btn btn-secondary">Login</button>
+
+              <a
+                href="{% url 'accounts:register' %}"
+                class="small text-muted mt-1"
+                >Click here to register</a
+              >
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-    {% for error in errors %}
-    <script>
-      alert("{{ error }}");
-    </script>
-    {% endfor %}
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}

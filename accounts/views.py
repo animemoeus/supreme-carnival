@@ -1,16 +1,9 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
-from rest_framework import status
-from rest_framework.generics import CreateAPIView
-from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
 
-from .api.serializers import LoginSerializer
 from .forms import LoginForm, RegisterForm
 
 
@@ -28,15 +21,14 @@ class LoginView(TemplateView):
         if not form.is_valid():
             return render(request, "accounts/login.html", context)
 
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(request, username=email, password=password)
-
+        user = authenticate(
+            self.request,
+            username=form.cleaned_data.get("email"),
+            password=form.cleaned_data.get("password"),
+        )
         if user:
             login(request, user)
-            return redirect(reverse("accounts:home"))
-        else:
-            context["errors"] = ["Invalid username or password"]
+            return redirect("accounts:home")
 
         return render(request, "accounts/login.html", context)
 
