@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic.edit import UpdateView
 
-from .forms import AddCountryForm
+from .forms import AddCountryForm, EditCountryForm
 from .models import Country
 
 
@@ -27,3 +29,10 @@ class AddCountryView(View):
             return redirect("countries:index")
 
         return render(self.request, "countries/add.html", {"form": form})
+
+
+class EditCountryView(UpdateView):
+    model = Country
+    form_class = EditCountryForm
+    template_name = "countries/edit.html"
+    success_url = reverse_lazy("countries:index")
