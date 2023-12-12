@@ -22,4 +22,5 @@ urlpatterns = [
     path("api/accounts/", include("accounts.api.urls", namespace="accounts-api")),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("countries/", include("countries.urls", namespace="countries")),
+    path("categories/", include("categories.urls", namespace="categories")),
 ]
