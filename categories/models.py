@@ -4,7 +4,7 @@ from countries.models import Country
 
 
 class Category(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.PROTECT)
+    country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=255)
     price_per_kilo = models.FloatField()
 
