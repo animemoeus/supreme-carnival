@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.list import ListView
 
 from .forms import CreateCategoryForm
@@ -18,4 +18,10 @@ class CreateCategoryView(CreateView):
     model = Category
     form_class = CreateCategoryForm
     template_name = "categories/create.html"
+    success_url = reverse_lazy("categories:index")
+
+
+class DeleteCategoryView(DeleteView):
+    model = Category
+    template_name = "categories/delete.html"
     success_url = reverse_lazy("categories:index")
