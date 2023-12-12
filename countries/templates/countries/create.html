@@ -1,13 +1,12 @@
-{% extends "base.html" %} {% block title %} Add Country | BRCG 🚀 {% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %} Create Country | BRCG 🚀 {% endblock %} {% block content %}
 <div class="d-flex align-items-center justify-content-center vh-100">
   <div class="row container-md justify-content-center">
     <div class="col-12 col-sm-5">
       <div class="card shadow">
-        <div class="card-header text-center fw-bold">Add Country</div>
+        <div class="card-header text-center fw-bold">Create Country</div>
 
         <div class="card-body">
-          <form action="{% url 'countries:add' %}" method="post">
+          <form action="{% url 'countries:create' %}" method="post">
             {% csrf_token %} {% for field in form %}
             <div class="mb-3">
               <label for="{{ field.label }}" class="form-label"
@@ -32,7 +31,7 @@
               <a href="{% url 'countries:index' %}" class="btn btn-secondary">
                 Back
               </a>
-              <button type="submit" class="btn btn-primary">Add</button>
+              <button type="submit" class="btn btn-primary">Create</button>
             </div>
           </form>
         </div>
