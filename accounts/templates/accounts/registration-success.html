@@ -1,0 +1,18 @@
+{% extends "accounts/base.html" %} {% block title %} Account Created | BRCG 🚀
+{% endblock %} {% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="text-center">
+    <h2>Account Created 👍</h2>
+
+    <hr />
+
+    <p class="animate__animated animate__pulse">
+      <a href="{% url 'accounts:login' %}" class="small text-muted mt-1"
+        ><button type="button" class="btn btn-secondary">
+          Click here to login
+        </button></a
+      >
+    </p>
+  </div>
+</div>
+{% endblock %}

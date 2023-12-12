@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.views import View
 from django.views.generic import TemplateView
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
@@ -10,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .api.serializers import LoginSerializer
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 
 class LoginView(TemplateView):
@@ -38,6 +39,30 @@ class LoginView(TemplateView):
             context["errors"] = ["Invalid username or password"]
 
         return render(request, "accounts/login.html", context)
+
+
+class RegisterView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(reverse("accounts:home"))
+
+        return render(
+            request, "accounts/register.html", context={"form": RegisterForm()}
+        )
+
+    def post(self, request):
+        form = RegisterForm(request.POST)
+        context = {"form": form}
+
+        if not form.is_valid():
+            return render(request, "accounts/register.html", context)
+
+        user = form.save()
+
+        if user:
+            return redirect(reverse("accounts:registration-success"))
+
+        return render(request, "accounts/register.html", context)
 
 
 def index(request):
