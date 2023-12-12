@@ -1,0 +1,44 @@
+{% extends "accounts/base.html" %} {% block title %} User Registration | BRCG 🚀
+{% endblock %} {% block content %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+  <div class="row container-md justify-content-center">
+    <div class="col-12 col-sm-5">
+      <div class="card shadow">
+        <div class="card-header text-center fw-bold">Create Account</div>
+
+        <div class="card-body">
+          <form action="{% url 'accounts:register' %}" method="post">
+            {% csrf_token %} {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.label }}" class="form-label"
+                >{{ field.label }}</label
+              >
+
+              <input
+                id="{{ field.label }}"
+                type="{{ field.name }}"
+                name="{{ field.name }}"
+                class="form-control"
+                requireddd="{{ field.field.required }}"
+              />
+              {% for error in field.errors %}
+              <div class="form-text animate__animated animate__headShake">
+                {{ error }}
+              </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="div d-flex justify-content-between align-middle">
+              <button type="submit" class="btn btn-secondary">Register</button>
+
+              <a href="{% url 'accounts:login' %}" class="small text-muted mt-1"
+                >Click here to login</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
