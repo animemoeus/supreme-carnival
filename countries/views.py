@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView, UpdateView
 
 from .forms import AddCountryForm, EditCountryForm
 from .models import Country
@@ -35,4 +35,10 @@ class EditCountryView(UpdateView):
     model = Country
     form_class = EditCountryForm
     template_name = "countries/edit.html"
+    success_url = reverse_lazy("countries:index")
+
+
+class DeleteCountryView(DeleteView):
+    model = Country
+    template_name = "countries/delete.html"
     success_url = reverse_lazy("countries:index")
