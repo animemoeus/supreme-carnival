@@ -1,14 +1,29 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 
+from .forms import AddCountryForm
 from .models import Country
 
 
 class CountryView(View):
     def get(self, request):
-        countries = Country.objects.all()
+        countries = Country.objects.all().order_by("-id")
 
         context = {"countries": countries}
 
         return render(self.request, "countries/index.html", context)
+
+
+class AddCountryView(View):
+    def get(self, request):
+        return render(self.request, "countries/add.html", {"form": AddCountryForm})
+
+    def post(self, request):
+        form = AddCountryForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("countries:index")
+
+        return render(self.request, "countries/add.html", {"form": form})
