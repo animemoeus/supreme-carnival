@@ -15,7 +15,6 @@ from .forms import LoginForm
 
 class LoginView(TemplateView):
     def get(self, request):
-        # If user is authenticated, redirect to home page
         if request.user.is_authenticated:
             return redirect(reverse("accounts:home"))
 
@@ -26,7 +25,7 @@ class LoginView(TemplateView):
         context = {"form": form}
 
         if not form.is_valid():
-            return render(request, "accounts/login.html", {"errors": form.errors})
+            return render(request, "accounts/login.html", context)
 
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
@@ -46,5 +45,11 @@ def index(request):
     return render(request, "accounts/base.html")
 
 
-def home(request):
-    return render(request, "accounts/home.html")
+class HomeView(TemplateView):
+    def get(self, request):
+        user = request.user
+
+        if not user.is_authenticated:
+            return redirect("accounts:login")
+
+        return render(request, "accounts/home.html")
