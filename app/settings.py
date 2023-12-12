@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "rest_framework",
     # local app
     "accounts",
+    "countries",
+    "categories",
 ]
 
 MIDDLEWARE = [
