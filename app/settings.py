@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "accounts",
     "countries",
     "categories",
+    "calculate",
     "destination",
 ]
 
