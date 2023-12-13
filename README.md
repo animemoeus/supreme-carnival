@@ -2,11 +2,6 @@
 
 ---
 
-* Project information
-* Documentation
-
----
-
 ## Installation instructions
 
 Install the requirements
@@ -256,7 +251,34 @@ http://localhost:8000/api/destination/?search=mana
 }
 ```
 
----
-* Usage guidelines
-* Contribution guidelines
-* License information
+### Calculate API
+
+Endpoint (POST)
+
+```bash
+http://localhost:8000/api/calculate/
+```
+
+Payload
+
+```json
+{
+    "country_id": 1,
+    "category_id": 1,
+    "destination_id": 268,
+    "weight": 4
+}
+```
+
+Response
+
+```json
+{
+    "origin": "Japan",
+    "destination": "Sumatera Utara, Mandailing Natal, 22916",
+    "category_name": "Chip",
+    "international_price": 1200000.0,
+    "domestic_price": 1080000.0,
+    "total_price": 2280000.0
+}
+```
