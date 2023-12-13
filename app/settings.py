@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "accounts",
     "countries",
     "categories",
+    "destination",
 ]
 
 MIDDLEWARE = [
