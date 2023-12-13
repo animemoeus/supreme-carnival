@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+  Update Category | BRCG 🚀
+{% endblock title %}
+{% block content %}
+  <div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="row container-md justify-content-center">
+      <div class="col-12 col-sm-10">
+        <div class="card shadow">
+          <div class="card-header text-center fw-bold">Update Category</div>
+          <div class="card-body">
+            <form action="{% url 'categories:update' pk=object.pk %}" method="post">
+              {% csrf_token %}
+              {% for field in form %}
+                {% if field.field.widget.input_type == 'select' and field.name == 'country' %}
+                  <div class="mb-3">
+                    <label for="{{ form.country.id_for_label }}" class="form-label">{{ form.country.label }}</label>
+                    {{ form.country }}
+                    {% for error in form.country.errors %}
+                      <div class="form-text animate__animated animate__headShake">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  <div class="mb-3">
+                    <label for="{{ field.label }}" class="form-label">{{ field.label }}</label>
+                    <input id="{{ field.label }}"
+                           type="{{ field.field.widget.input_type }}"
+                           name="{{ field.name }}"
+                           class="form-control"
+                           value="{{ field.value|default:'' }}" />
+                    {% for error in field.errors %}
+                      <div class="form-text animate__animated animate__headShake">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'categories:index' %}" class="btn btn-secondary">Back</a>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
