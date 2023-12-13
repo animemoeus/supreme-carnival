@@ -1,5 +1,7 @@
 # BRCG
 
+[![Fly Deploy](https://github.com/animemoeus/supreme-carnival/actions/workflows/fly.yml/badge.svg)](https://github.com/animemoeus/supreme-carnival/actions/workflows/fly.yml)
+
 ---
 
 ## Installation Instructions
