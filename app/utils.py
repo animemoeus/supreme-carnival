@@ -36,3 +36,10 @@ class RajaOngkir:
                 return data
 
         return None
+
+    def validate_city_id(self, id: int) -> None | dict:
+        for data in self.get_all_city():
+            if data.get("city_id") == str(id):
+                return data
+
+        return None
