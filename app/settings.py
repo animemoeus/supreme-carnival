@@ -26,7 +26,10 @@ SECRET_KEY = "django-insecure-^+4f#%b&*v%%4@^ll3)4ds^a!-0#bsff&(3@m(d*d(1rvta0t4
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://brcg.animemoe.us/accounts/register/",
+    "https://brcg.fly.dev",
+]
 
 # Application definition
 
