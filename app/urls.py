@@ -22,6 +22,9 @@ urlpatterns = [
     path("api/accounts/", include("accounts.api.urls", namespace="accounts-api")),
     path("api/countries/", include("countries.api.urls", namespace="countries-api")),
     path("api/categories/", include("categories.api.urls", namespace="categories-api")),
+    path(
+        "api/destination/", include("destination.api.urls", namespace="destination-api")
+    ),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("countries/", include("countries.urls", namespace="countries")),
     path("categories/", include("categories.urls", namespace="categories")),
