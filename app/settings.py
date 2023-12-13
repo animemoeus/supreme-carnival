@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
-    "https://brcg.animemoe.us/accounts/register/",
+    "https://brcg.animemoe.us",
     "https://brcg.fly.dev",
 ]
 
