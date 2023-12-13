@@ -44,25 +44,25 @@ python manage.py runserver
 ### User Registration
 
 ```bash
-http://localhost:8000/accounts/register/
+https://brcg.animemoe.us/accounts/register/
 ```
 
 ### User Login
 
 ```bash
-http://localhost:8000/accounts/login/
+https://brcg.animemoe.us/accounts/login/
 ```
 
 ### Country Management
 
 ```bash
-http://localhost:8000/countries/
+https://brcg.animemoe.us/countries/
 ```
 
 ### Category Management
 
 ```bash
-http://localhost:8000/categories/
+https://brcg.animemoe.us/categories/
 ```
 
 ---
@@ -74,7 +74,7 @@ http://localhost:8000/categories/
 Endpoint (POST)
 
 ```bash
-http://localhost:8000/api/accounts/register/
+https://brcg.animemoe.us/api/accounts/register/
 ```
 
 Payload
@@ -99,7 +99,7 @@ Response
 Endpoint (POST)
 
 ```bash
-http://localhost:8000/api/accounts/login/
+https://brcg.animemoe.us/api/accounts/login/
 ```
 
 Payload
@@ -125,7 +125,7 @@ Response
 Endpoint (GET)
 
 ```bash
-http://localhost:8000/api/countries/
+https://brcg.animemoe.us/api/countries/
 ```
 
 Available Params
@@ -135,7 +135,7 @@ search
 ```
 
 ```bash
-http://localhost:8000/api/countries/?search=test
+https://brcg.animemoe.us/api/countries/?search=test
 ```
 
 Response
@@ -163,7 +163,7 @@ Response
 Endpoint (GET)
 
 ```bash
-http://localhost:8000/api/categories/
+https://brcg.animemoe.us/api/categories/
 ```
 
 Available Params
@@ -173,9 +173,9 @@ search, country_id
 ```
 
 ```bash
-http://localhost:8000/api/categories/?country_id=1
-http://localhost:8000/api/categories/?search=laptop
-http://localhost:8000/api/categories/?country_id=1&search=laptop
+https://brcg.animemoe.us/api/categories/?country_id=1
+https://brcg.animemoe.us/api/categories/?search=laptop
+https://brcg.animemoe.us/api/categories/?country_id=1&search=laptop
 ```
 
 Response
@@ -203,7 +203,7 @@ Response
 Endpoint (GET)
 
 ```bash
-http://localhost:8000/api/destination/
+https://brcg.animemoe.us/api/destination/
 ```
 
 ```json
@@ -237,7 +237,7 @@ search
 ```
 
 ```bash
-http://localhost:8000/api/destination/?search=mana
+https://brcg.animemoe.us/api/destination/?search=mana
 ```
 
 ```json
@@ -258,7 +258,7 @@ http://localhost:8000/api/destination/?search=mana
 Endpoint (POST)
 
 ```bash
-http://localhost:8000/api/calculate/
+https://brcg.animemoe.us/api/calculate/
 ```
 
 Payload
