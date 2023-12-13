@@ -26,3 +26,13 @@ class RajaOngkir:
             return True
 
         return False
+
+    def search_city(self, search):
+        for data in self.get_all_city():
+            if (
+                search.lower() in data.get("province").lower()
+                or search.lower() in data.get("city_name").lower()
+            ):
+                return data
+
+        return None
