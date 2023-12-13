@@ -11,17 +11,19 @@ class CheckDestinationView(GenericAPIView):
 
     def get(self, request):
         search = request.query_params.get("search", None)
+        raja_ongkir = RajaOngkir()
 
         if not search:
             return Response(
-                {"message": "`search` params is required."},
+                {"data": raja_ongkir.get_all_city()},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         raja_ongkir = RajaOngkir()
-        if raja_ongkir.check_city(search):
+
+        if raja_ongkir.search_city(search):
             return Response(
-                {"message": f"{search.capitalize()} is available for destination."},
+                {"data": raja_ongkir.search_city(search)},
                 status=status.HTTP_200_OK,
             )
 

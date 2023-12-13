@@ -1,5 +1,4 @@
 import requests
-from saiyaku import retry
 
 
 class RajaOngkir:
@@ -9,12 +8,11 @@ class RajaOngkir:
             "80277394acf599ed1cc96058b79d57cf"  # Move this to .env for production
         )
 
-    @retry(tries=10, delay=2)
     def get_all_city(self):
         url = f"{self.base_url}/city"
         headers = {"key": self.api_key}
 
-        response = requests.request("GET", url, headers=headers, timeout=5)
+        response = requests.request("GET", url, headers=headers)
         cities = response.json().get("rajaongkir").get("results")
         return cities
 
@@ -29,9 +27,12 @@ class RajaOngkir:
 
         return False
 
-    def validate_city_id(self, id: int) -> None | dict:
+    def search_city(self, search):
         for data in self.get_all_city():
-            if data.get("city_id") == str(id):
+            if (
+                search.lower() in data.get("province").lower()
+                or search.lower() in data.get("city_name").lower()
+            ):
                 return data
 
         return None
