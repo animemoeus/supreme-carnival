@@ -27,5 +27,5 @@ class CheckDestinationView(GenericAPIView):
 
         return Response(
             {"message": f"{search.capitalize()} is not available for destination."},
-            status=status.HTTP_200_OK,
+            status=status.HTTP_400_BAD_REQUEST,
         )
