@@ -14,6 +14,7 @@ RUN set -ex && \
     pip install --upgrade pip && \
     pip install -r /tmp/requirements.txt && \
     rm -rf /root/.cache/
+RUN python manage.py collectstatic --noinput
 COPY . /code
 
 EXPOSE 8000
