@@ -2,7 +2,7 @@
 
 ---
 
-## Installation instructions
+## Installation Instructions
 
 Install the requirements
 
