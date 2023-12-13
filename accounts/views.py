@@ -57,16 +57,6 @@ class RegisterView(View):
         return render(request, "accounts/register.html", context)
 
 
-def index(request):
-    # return HttpResponse("Hello World!")
-    return render(request, "accounts/base.html")
-
-
 class HomeView(TemplateView):
     def get(self, request):
-        user = request.user
-
-        if not user.is_authenticated:
-            return redirect("accounts:login")
-
         return render(request, "accounts/home.html")
