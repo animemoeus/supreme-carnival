@@ -1,6 +1,9 @@
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase
 
+from categories.models import Category
 from countries.models import Country
 
 from .models import Category
@@ -8,7 +11,6 @@ from .models import Category
 
 class CategoryModelTest(TestCase):
     def setUp(self):
-        # Create a sample country for testing
         country = Country.objects.create(
             name="Test Country", flag="https://example.com/flag.png", currency="USD"
         )
@@ -84,3 +86,54 @@ class CategoryViewsTest(TestCase):
         self.assertEqual(response.status_code, 302)
         with self.assertRaises(Category.DoesNotExist):
             Category.objects.get(pk=self.category.id)
+
+
+class CategoryListAPITest(APITestCase):
+    def setUp(self):
+        self.country1 = Country.objects.create(
+            name="Test Country 1", flag="https://example.com/flag1.png", currency="USD"
+        )
+        self.country2 = Country.objects.create(
+            name="Test Country 2", flag="https://example.com/flag2.png", currency="EUR"
+        )
+        self.country3 = Country.objects.create(
+            name="Test Country 3", flag="https://example.com/flag3.png", currency="GBP"
+        )
+
+        self.category1 = Category.objects.create(
+            country=self.country1, title="Category 1", price_per_kilo=10.0
+        )
+        self.category2 = Category.objects.create(
+            country=self.country1, title="Category 2", price_per_kilo=15.0
+        )
+        self.category3 = Category.objects.create(
+            country=self.country2, title="Category 3", price_per_kilo=12.0
+        )
+        self.category4 = Category.objects.create(
+            country=self.country2, title="Category 4", price_per_kilo=8.0
+        )
+        self.category5 = Category.objects.create(
+            country=self.country3, title="Category 5", price_per_kilo=20.0
+        )
+
+    def test_category_list_api_view_with_search_and_filter(self):
+        url = reverse("categories-api:index")
+        response = self.client.get(
+            url, {"search": "Category", "country_id": self.country1.id}
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data[0]["country"], self.country1.id)
+        self.assertEqual(response.data[0]["title"], self.category1.title)
+        self.assertEqual(response.data[1]["title"], self.category2.title)
+
+    def test_category_list_api_view_with_country_filter_only(self):
+        url = reverse("categories-api:index")
+        response = self.client.get(url, {"country_id": self.country2.id})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+        self.assertEqual(response.data[0]["country"], self.country2.id)
+        self.assertEqual(response.data[0]["title"], self.category3.title)
+        self.assertEqual(response.data[1]["title"], self.category4.title)
